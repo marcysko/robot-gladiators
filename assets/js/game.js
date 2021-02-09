@@ -1,19 +1,26 @@
-// var playerName = 'Clank McKrank';
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
-console.log(playerName);
-console.log(playerHealth, playerAttack, playerMoney);
-console.log("You can put regular sentences in these.");
-
-var enemyName = "Roborto";
+var enemyNames = ['Roborto', 'Amy Android', 'Robo Trumble'];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-// fight function
-var fight = function() {
+console.log(enemyNames);
+console.log(enemyNames.length);
+console.log(enemyNames[0]);
+console.log(enemyNames[3]);
+
+console.log(enemyNames.length);
+for(var i = 0; i < enemyNames.length; i++) {
+  console.log(enemyNames[i]);
+  console.log(i);
+  console.log(enemyNames[i] + " is at " + i + " index");
+}
+var fight = function(enemyName) {
+  
+
   // Alert players that they are starting the round
   window.alert("Welcome to Robot Gladiators!");
 
@@ -68,5 +75,6 @@ var fight = function() {
   }
 };
 
-// run fight function to start game
-fight();
+for(var i = 0; i < enemyNames.length; i++) {
+  fight(enemyNames[i]);
+}
