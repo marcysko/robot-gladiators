@@ -37,49 +37,28 @@ var startGame = function() {
 var endGame = function() {
   window.alert("The game has now ended. Let's see how you did!");
 
-  // if player is still alive, player wins!
-  if (playerInfo.health > 0) {
-    window.alert("Great job, you've survived the game! You now have a score of" + playerInfo.money + '.');
+  // check localStorage for high score, if it's not there, use 0
+  var highScore = localStorage.getItem("highscore") || 0;
+
+  // if player have more money than the high score, player has new high score!
+  if (playerInfo.money > highScore) {
+    localStorage.setItem("highscore", playerInfo.money);
+    localStorage.setItem("name", playerInfo.name);
+
+    alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
   } else {
-    window.alert("You've lost your robot in battle!");
+    alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
   }
 
   // ask player if they'd like to play again
-  var playAgainConfirm = window.confirm('Would you like to play again?');
+  var playAgainConfirm = window.confirm("Would you like to play again?");
 
   if (playAgainConfirm) {
     startGame();
   } else {
-    window.alert('Thank you for playing Battlebots! Come back soon!');
+    window.alert("Thank you for playing Robot Gladiators! Come back soon!");
   }
 };
-var fightOrSkip = function() {
-  // ask player if they'd like to fight or skip using fightOrSkip function
-  // repeat and execute as long as the enemy-robot is alive 
-while(enemy.health > 0 && playerInfo.health > 0) {
-  fightOrSkip(); // <-- Replace code with this function call
-  var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-}
-
-  // if player picks "skip" confirm and then stop the loop
-  promptFight = promptFight.toLowerCase();
-
-if (promptFight === "skip") {
-    // confirm player wants to skip
-    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-
-    // if yes (true), leave fight
-    if (confirmSkip) {
-      window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-      // subtract money from playerMoney for skipping, but don't let them go into the negative
-      playerInfo.money = Math.max(0, playerInfo.money - 10);
-
-      // return true if player wants to leave
-      return true;
-    }
-  }   
-  return false;
-  };
 
 // fight function (now with parameter for enemy's object holding name, health, and attack values)
 var fight = function(enemy) {
